@@ -117,3 +117,27 @@ Com caminho completo:
 ## Observacao
 
 Enquanto os contratos dos outros integrantes nao estiverem implementados, o projeto completo pode nao compilar. Isso e esperado, porque `Main.hs` e `Terminal.hs` dependem dos modulos de modelo, persistencia, servicos e entrada.
+
+## Parte da Pessoa 2 - Servicos de contato
+
+Minha responsabilidade nesta etapa foi implementar as operacoes principais de contato no modulo `src/services/ContactService.hs`.
+
+Arquivos principais:
+
+- `src/services/ContactService.hs`
+- `test/ContactServiceTest.hs`
+
+### O que foi desenvolvido
+
+- `proximoId`: calcula automaticamente o proximo ID disponivel.
+- `adicionarContato`: valida nome e telefone antes de inserir o contato.
+- `buscarPorId`: localiza um contato pelo ID.
+- `buscarPorNome`: realiza busca parcial por nome ignorando maiusculas e minusculas.
+- `buscarPorTelefone`: realiza busca parcial por telefone.
+- `editarContato`: atualiza nome, telefone e email de um contato existente.
+- `removerContato`: remove um contato apos localizar o ID.
+- `ordenarPorNome`: ordena a lista para exibicao.
+
+### Validacao realizada
+
+Foi criado um teste pratico em `test/ContactServiceTest.hs` para verificar as regras basicas de cadastro, busca, edicao, remocao e geracao de ID, conforme o escopo definido para a Pessoa 2.
