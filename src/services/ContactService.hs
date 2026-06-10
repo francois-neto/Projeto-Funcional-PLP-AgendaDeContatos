@@ -12,6 +12,7 @@ module Services.ContactService
 import Data.Char (toLower)
 import Data.List (isInfixOf, sortBy)
 import Models.Contact
+import Utils.Validation (validarTelefoneBrasil)
 
 -- Gera o próximo ID disponível para um novo contato.
 proximoId :: [Contato] -> Int
@@ -24,8 +25,10 @@ adicionarContato rawNome rawTelefone rawEmail rawGrupos contatos =
   case (trim rawNome, trim rawTelefone) of
     ("", _) -> Left "Nome nao pode ser vazio."
     (_, "") -> Left "Telefone nao pode ser vazio."
-    (nomeValido, telefoneValido) ->
-      Right (contatos ++ [Contato
+    (nomeValido, telefoneValido)
+      | not (validarTelefoneBrasil telefoneValido) -> Left "Telefone invalido para o padrao brasileiro."
+      | otherwise ->
+          Right (contatos ++ [Contato
         { contatoId = proximoId contatos
         , nome = nomeValido
         , telefone = telefoneValido
@@ -57,8 +60,10 @@ editarContato targetId rawNome rawTelefone rawEmail contatos =
       case (trim rawNome, trim rawTelefone) of
         ("", _) -> Left "Nome nao pode ser vazio."
         (_, "") -> Left "Telefone nao pode ser vazio."
-        (nomeValido, telefoneValido) ->
-          Right (atualizarContato targetId nomeValido telefoneValido (trim rawEmail) contatoAtual contatos)
+        (nomeValido, telefoneValido)
+          | not (validarTelefoneBrasil telefoneValido) -> Left "Telefone invalido para o padrao brasileiro."
+          | otherwise ->
+              Right (atualizarContato targetId nomeValido telefoneValido (trim rawEmail) contatoAtual contatos)
 
 -- Remove um contato da lista com base no ID.
 removerContato :: Int -> [Contato] -> Either String [Contato]

@@ -12,15 +12,32 @@ main = do
   case removerContato 2 [Contato 1 "Ana" "9999" "a@a.com" [], Contato 2 "Bia" "8888" "b@b.com" []] of
     Left err -> failTest ("removerContato nao deveria falhar: " ++ err)
     Right contatos -> assertEqual "removerContato deve remover um contato existente" 1 (length contatos)
-  case editarContato 1 "Ana Atualizada" "0000" "ana@nova.com" [Contato 1 "Ana" "9999" "a@a.com" []] of
+  case editarContato 1 "Ana Atualizada" "1199999-9999" "ana@nova.com" [Contato 1 "Ana" "11999999999" "a@a.com" []] of
     Left err -> failTest ("editarContato nao deveria falhar: " ++ err)
     Right contatos -> do
       assertEqual "editarContato deve atualizar nome" "Ana Atualizada" (nome (head contatos))
-      assertEqual "editarContato deve atualizar telefone" "0000" (telefone (head contatos))
+      assertEqual "editarContato deve atualizar telefone" "1199999-9999" (telefone (head contatos))
       assertEqual "editarContato deve manter o ID" 1 (contatoId (head contatos))
   case adicionarContato "" "9999" "a@a.com" [] [] of
     Left _ -> pure ()
     Right _ -> failTest "adicionarContato deve rejeitar nome vazio"
+
+  case adicionarContato "Ana" "1199999-9999" "a@a.com" [] [] of
+    Left err -> failTest ("adicionarContato deve aceitar telefone celular brasileiro: " ++ err)
+    Right _ -> pure ()
+
+  case adicionarContato "Ana" "113333-3333" "a@a.com" [] [] of
+    Left err -> failTest ("adicionarContato deve aceitar telefone fixo brasileiro: " ++ err)
+    Right _ -> pure ()
+
+  case adicionarContato "Ana" "0800-123-4567" "a@a.com" [] [] of
+    Left err -> failTest ("adicionarContato deve aceitar telefone 0800: " ++ err)
+    Right _ -> pure ()
+
+  case adicionarContato "Ana" "99999-9999" "a@a.com" [] [] of
+    Left _ -> pure ()
+    Right _ -> failTest "adicionarContato deve rejeitar telefone sem DDD valido"
+
   putStrLn "Todos os testes da Pessoa 2 passaram."
 
 assertEqual :: (Eq a, Show a) => String -> a -> a -> IO ()
