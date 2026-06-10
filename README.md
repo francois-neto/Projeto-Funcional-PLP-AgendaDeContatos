@@ -137,7 +137,3 @@ Arquivos principais:
 - `editarContato`: atualiza nome, telefone e email de um contato existente.
 - `removerContato`: remove um contato apos localizar o ID.
 - `ordenarPorNome`: ordena a lista para exibicao.
-
-### Validacao realizada
-
-Foi criado um teste pratico em `test/ContactServiceTest.hs` para verificar as regras basicas de cadastro, busca, edicao, remocao e geracao de ID, conforme o escopo definido para a Pessoa 2.
