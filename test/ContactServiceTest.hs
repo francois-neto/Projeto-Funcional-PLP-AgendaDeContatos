@@ -1,6 +1,6 @@
 module Main where
 
-import Models.Contact
+import Models
 import Services.ContactService
 
 main :: IO ()

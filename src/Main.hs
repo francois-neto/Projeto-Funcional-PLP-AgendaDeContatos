@@ -1,6 +1,6 @@
 module Main where
 
-import Repository.ContactRepository
+import CSVRepository
 import UI.Terminal
 
 csvPath :: FilePath
