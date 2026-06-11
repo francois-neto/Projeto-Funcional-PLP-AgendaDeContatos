@@ -22,7 +22,7 @@ import Text.Read (readMaybe)
  -}
 lerInteiro :: String -> IO Int
 lerInteiro mensagem = do
-  putStr mensagem
+  putStrLn mensagem
   entrada <- getLine
   case readMaybe entrada of
     Just numero -> pure numero
@@ -39,7 +39,7 @@ lerInteiro mensagem = do
  -}
 lerTextoNaoVazio :: String -> IO String
 lerTextoNaoVazio mensagem = do
-  putStr mensagem
+  putStrLn mensagem
   entrada <- getLine
   let texto = trim entrada
   if null texto
@@ -56,7 +56,7 @@ lerTextoNaoVazio mensagem = do
  -}
 lerTextoOpcional :: String -> IO String
 lerTextoOpcional mensagem = do
-  putStr mensagem
+  putStrLn mensagem
   trim <$> getLine
 
 {-|
@@ -67,7 +67,7 @@ lerTextoOpcional mensagem = do
  -}
 confirmar :: String -> IO Bool
 confirmar mensagem = do
-  putStr mensagem
+  putStrLn mensagem
   entrada <- getLine
   case map toLower (trim entrada) of
     "s" -> pure True
