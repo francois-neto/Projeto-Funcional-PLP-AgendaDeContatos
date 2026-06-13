@@ -10,7 +10,7 @@ module Utils.InputUtils
 
 import Data.Char (isSpace, toLower)
 import Data.List (intercalate)
-import Models.Contact
+import Models
 import Text.Read (readMaybe)
 
 {-|

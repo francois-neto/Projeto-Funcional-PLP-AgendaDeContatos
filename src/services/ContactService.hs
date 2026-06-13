@@ -11,7 +11,7 @@ module Services.ContactService
 
 import Data.Char (toLower)
 import Data.List (isInfixOf, sortBy)
-import Models.Contact
+import Models
 import Utils.Validation (validarTelefoneBrasil)
 
 -- Gera o próximo ID disponível para um novo contato.
