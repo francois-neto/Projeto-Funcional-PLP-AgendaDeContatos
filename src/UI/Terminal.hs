@@ -2,7 +2,7 @@ module UI.Terminal
   ( menuPrincipal
   ) where
 
-import Models.Contact
+import Models
 import Services.ContactService
 import Services.GroupService
 import Utils.InputUtils

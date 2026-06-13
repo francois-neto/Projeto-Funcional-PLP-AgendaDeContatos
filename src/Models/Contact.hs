@@ -1,4 +1,4 @@
-module Models.Contact
+module Models
   ( Contato(..)
   ) where
 
