@@ -1,9 +1,10 @@
 module Utils.Validation
   ( validarTelefoneBrasil
   , normalizarTelefone
+  , normalizarNomeGrupo
   ) where
 
-import Data.Char (isDigit)
+import Data.Char (isDigit, toUpper, toLower, isSpace)
 
 -- Valida telefones brasileiros com DDD, celulares, fixos e serviços.
 validarTelefoneBrasil :: String -> Bool
@@ -41,3 +42,16 @@ todosDdds =
   , "81", "82", "83", "84", "85", "86", "87", "88", "89"
   , "91", "92", "93", "94", "95", "96", "97", "98", "99"
   ]
+
+normalizarNomeGrupo :: String -> String
+normalizarNomeGrupo s = firstUpperRestLower (trim s)
+
+firstUpperRestLower :: String -> String
+firstUpperRestLower [] = []
+firstUpperRestLower (x:xs) = toUpper x : minusculas xs
+  where
+    minusculas [] = []
+    minusculas (y:ys) = toLower y : minusculas ys
+
+trim :: String -> String
+trim x = reverse (dropWhile isSpace (reverse (dropWhile isSpace x)))
